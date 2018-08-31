@@ -1,0 +1,233 @@
+<html>
+<head>
+
+<title>Apply an 'active' Class to all Nav Items with CraftCMS - www.perrera.com</title>
+<body>
+
+
+<body>
+<h2>18 JAN 2016</h2>
+
+<h1>Apply an 'active' Class to all Nav Items with CraftCMS</h1>
+
+<h2>BY DAN PERRERA</h2>
+
+<style>
+
+h1 {
+font-weight: normal;
+text-decoration: none;
+font-size: 80px;
+color: roboto;
+background-color: #dddddd;
+margin-top: 190px;
+margin-right: 220px;
+margin-left: 370px;
+margin-bottom: 100px;
+line-height: 1;
+text-align: left;
+
+}
+</style>
+
+<style>
+
+h2 {
+font-weight: normal;
+text-decoration: none;
+font-size: 15px;
+color: roboto;
+background-color: #dddddd;
+margin-top: 50px;
+margin-right: 50px;
+margin-left: 370px;
+margin-bottom: 50px;
+line-height: 1.6;
+text-align: justify;
+}
+</style>
+
+<style>
+h3 {
+font-weight: normal;
+text-decoration: none;
+font-size: 20px;
+color: roboto;
+background-color: #dddddd;
+margin-top: 50px;
+margin-right: 350px;
+margin-left: 370px;
+margin-bottom: 50px;
+line-height: 1.6;
+text-align: justify;
+}
+</style>
+
+<style>
+h4 {
+font-weight: bold;
+text-decoration: none;
+font-size: 20px;
+color: roboto;
+background-color: #dddddd;
+margin-top: 50px;
+margin-right: 350px;
+margin-left: 370px;
+margin-bottom: 50px;
+line-spacing: 10px;
+line-height: 1.6;
+text-align: left;
+}
+</style>
+
+<style>
+h5 {
+font-weight: normal;
+text-decoration: none;
+font-size: 15px;
+color: roboto;
+background-color: #dddddd;
+margin-top: 100px;
+margin-left: 370px;
+margin-right: 60px;
+line-spacing: 10px;
+line-height: 10;
+text-align: right;
+}
+</style>
+
+<style>
+
+h6 {
+font-weight: normal;
+text-decoration: none;
+font-size: 15px;
+margin-right: 60px;
+color: roboto;
+background-color: #dddddd;
+text-align: right;
+}
+.inline {
+display: block;
+margin: 0 !important;
+}
+
+.inline li {
+  display: inline-block;
+  margin: 0 !important;
+}
+
+.inline .right  {
+  float: right;
+  margin-right: 30px !important;
+}
+
+</style>
+
+<h3>In any content managed website, the need always seems to arise for a structured content section that can handle multiple levels of navigation. On a recent project I wanted to apply an “active” class to every page in the current path to give visitors a better sense of where they are in the site. Before I reveal the solution, it’s worth understanding the basics of how the {% nav %} tag works and exploring some of the models that Craft supplies.
+
+<h4>The Craft {% nav %} Tag</h4>
+
+<h3>Craft makes rendering structured navigation trivially easy with the {% nav %} tag, as we can see with this example from the documentation:
+{% set entries = craft.entries.section('pages') %}<<ul id="nav">
+    {% nav entry in entries %}
+        <<li>
+            <a href="{{ entry.url }}">{{ entry.title }}</a>
+            {% ifchildren %}
+                <ul>
+                    {% children %}
+                </ul>
+            {% endifchildren %}
+        </li>
+    {% endnav %}
+</ul></h3>
+<h3>But looking at the {% children %} tag, you may have the urge to try to wrap markup around it or try to cajole it in another way but you won’t have any luck. What is that thing doing?! From the docs again:</h3>
+
+<h3>When Craft gets to this tag, it will loop through the element’s children, applying the same template defined between your {% nav %} and {% endnav %} tags to those children.
+
+In other words: the {% children %} tag copies the markup inside the {% nav %} tag, including logic. So in the above example, the {% children %} tag would output something like this for each entry:
+
+<li>
+    <a href="https://foredesign.co/projects/logos">Logos</a>
+</li>
+So if we gave that li a class of active, every list item would have that class regardless of whether it was actually active or not. That won’t do.
+
+The next step is to write some logic — in this case, an if statement to figure out when we want to apply that class. What tools do we have at our disposal to figure out whether an entry is active or not? Our URL path is a good place to start: we have access to the entry slugs from the craft.entries model, it mirrors the structure of our navigation, and it changes to reflect what page our visitors navigate to. Our logic should sound something like this: “if an entry’s slug is in the URL path, then give it a class of active.”
+
+The next question is, how do we turn the URL path into something we can use? Craft comes to the rescue again with the craft.request model. Specifically, we’re after the segments property, which returns an array of path segments in the URL. That means we can take a URL that looks like this:
+
+https://foredesign.co/projects/logos
+
+and start working with it in our Craft template like this:
+
+{# Get the segments and store then in a variable #}
+{% set slugs = craft.request.segments %}
+
+{# Dump the variable to see what we have #}
+{{ dump(slugs) }}
+
+{# Returns:
+ # array (size=2)
+ #   0 => string 'projects' (length=8)
+ #   1 => string 'logos' (length=5)
+ #}
+So we have the slugs, now we just have to check if the entry slug for each navigation item is in our slugs array as we iterate in our {% nav %} tag. Maybe something like this:
+
+{% set entries = craft.entries.section('pages') %}
+{% set slugs = craft.request.segments %}
+
+<ul id="nav">
+    {% nav entry in entries %}
+        <li{% if entry.slug in slugs %} class="active"{% endif %}>
+        <a href="{{ entry.url }}">{{ entry.title }}</a>
+        {% ifchildren %}
+            <ul>
+                {% children %}
+            </ul>
+        {% endifchildren %}
+        </li>
+    {% endnav %}
+</ul>
+We’re taking advantage of the Twig in operator to check if the current entry.slug is in the slugs array and if it is, we apply class="active" to the li tag. This totally works! Now, since we’re probably going to want to use this bit of code more than once, we should turn it into a macro:
+
+{# ================================
+ # In your Macros file
+ # _macros.twig
+ # ================================ #}
+
+{% macro isActive(slug) %}
+    {% if slug in craft.request.segments %} class="active"{% endif %}
+{% endmacro %}
+
+
+{# ================================
+ # In your template file
+ # ================================ #}
+
+{% import "_macros" as macros %}
+
+<ul id="nav">
+    {% nav entry in entries %}
+        <li{{ macros.isActive(entry.slug) }}>
+            <a href="{{ entry.url }}">{{ entry.title }}</a>
+            {% ifchildren %}
+                <ul>
+                    {% children %}
+                </ul>
+            {% endifchildren %}
+        </li>
+    {% endnav %}
+</ul>
+You can see that we’ve created a macro that will accept a slug to test and will work through the logic while keeping our code tidy and reusable. Hopefully this small example opens up a world of possibilities for your next project.</h3>
+
+<div>
+<ul class="inline"><li class="left"><a href="file:///C:/Users/user/Desktop/19.html"><p>&larr; The Current State of Web Security</p></a></li><li class="right"><a href="file:///C:/Users/user/Desktop/21.html"><p> 2015 Recap  &rarr;</p> </a> </li> </ul></div>
+
+<div><h6><p>© 2011—2018 Fore Design, Inc.</p></h6></div>
+
+<body/>
+
+
+<head/>
+<html/>
+

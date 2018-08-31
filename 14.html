@@ -1,0 +1,174 @@
+<html>
+<head>
+
+<title>Designing with Tachyons - www.perrera.com</title>
+
+<body>
+
+
+<h2>16 JUN 2017</h2>
+
+<h1>Designing with Tachyons</h1>
+
+<h2>BY DAN PERRERA</h2>>
+
+<style>
+
+h1 {
+font-weight: normal;
+text-decoration: none;
+font-size: 80px;
+color: roboto;
+background-color: #dddddd;
+margin-top: 190px;
+margin-right: 220px;
+margin-left: 370px;
+margin-bottom: 100px;
+line-height: 1;
+text-align: left;
+
+}
+</style>
+
+<style>
+
+h2 {
+font-weight: normal;
+text-decoration: none;
+font-size: 15px;
+color: roboto;
+background-color: #dddddd;
+margin-top: 50px;
+margin-right: 50px;
+margin-left: 370px;
+margin-bottom: 50px;
+line-height: 1.6;
+text-align: justify;
+}
+</style>
+
+<style>
+h3 {
+font-weight: normal;
+text-decoration: none;
+font-size: 20px;
+color: roboto;
+background-color: #dddddd;
+margin-top: 50px;
+margin-right: 350px;
+margin-left: 370px;
+margin-bottom: 50px;
+line-height: 1.6;
+text-align: justify;
+}
+</style>
+
+<style>
+h4 {
+font-weight: bold;
+text-decoration: none;
+font-size: 20px;
+color: roboto;
+background-color: #dddddd;
+margin-top: 50px;
+margin-right: 350px;
+margin-left: 370px;
+margin-bottom: 50px;
+line-spacing: 10px;
+line-height: 1.6;
+text-align: left;
+}
+</style>
+
+<style>
+h5 {
+font-weight: normal;
+text-decoration: none;
+font-size: 15px;
+color: roboto;
+background-color: #dddddd;
+margin-top: 100px;
+margin-left: 370px;
+margin-right: 60px;
+line-spacing: 10px;
+line-height: 10;
+text-align: right;
+}
+</style>
+
+<style>
+
+h6 {
+font-weight: normal;
+text-decoration: none;
+font-size: 15px;
+margin-right: 60px;
+color: roboto;
+background-color: #dddddd;
+text-align: right;
+}
+.inline {
+display: block;
+margin: 0 !important;
+}
+
+.inline li {
+  display: inline-block;
+  margin: 0 !important;
+}
+
+.inline .right  {
+  float: right;
+  margin-right: 30px !important;
+}
+
+</style>
+<h3>Last year I started developing a CSS mini-framework to use on Fore Design projects. Designed around a flexible grid system, it had a handful of pithy classes like title, headline, and intro and was meant to be designer friendly, semantic, modular, and extendible. The idea was to make something that helped Amy and I execute our then-new web design process that started with a clickable outline and, over time, evolved into a finished website. I struggled to create a system that could smoothly make the transition but also offered enough design flexibility to satisfy our needs. In a bout of frustration I gave <u>Tachyons</u> a try.</h3>
+
+<h3>first I hated it. All of the classes in my HTML looked ugly and seemed inscrutable. Furthermore, this technique seemed to violate everything I knew about CSS, the benefits of the cascade, and semantic naming. Still I pushed forward with the idea that it’s good to challenge your habits and, as I grew to understand and trust the conventions of the Tachyons design system, I began to love it.</h3>
+
+<h4>What is Tachyons?</h4>
+
+<h3>At its most basic, Tachyons is a bunch of tiny utility classes that map to CSS properties that can be chained together to create design. You might be tempted to think of Tachyons as a CSS framework but it’s not really. There aren’t any nav bars or default button styles or other design decisions to pollute your blank canvas. Instead, it’s built around a scale that governs type size and measurements for padding, margins, and other properties where size comes into play. For instance, if you wanted to make a big, bold, blue headline, it might look like this:</h3>
+
+<h3>class= "f2 b blue” > Hello Tachyons!</h3>
+<h3>Tachyons also elegantly handles responsive design with breakpoints for “not small,” “medium,” and “large.” So if we wanted our headline to be responsive, it might look like this:</h3>
+
+<h3> < h1 class="f3 f2-m f1-l b blue”>Hello Tachyons!</h3>
+<h3>If you’re interested in learning more about Tachyons’ technical qualities or how to use it, you should read the <u>documentation</u> or, if you’re looking for examples of Tachyons in action, you can view the source code for a few of the sites we’ve built with it: <u>Shubox</u> and <u>Fore Design</u>.</h3>
+
+<h3>For now, I want to focus on the tangible benefits Amy and I have experienced as a design team.</h3>
+
+<h4>Velocity</h4>
+
+<h3>Not long after experimenting with Tachyons, it became clear that semantics were holding us back from making design decisions and quickly iterating in the browser. Not only did we have to make the actual design decision, but then we needed to figure out what to call it, how to structure it, make sure there weren’t any naming conflicts, etc.</h3>
+
+<h3>With Tachyons’ functional approach, we didn’t need to worry about what to call different elements. We could design in a much more fluid way because we were making the majority of our design notation in HTML, therefore writing way less CSS and switching contexts less often.</h3>
+
+<h4>Stability</h4>
+
+<h3>You might be thinking, “What if I want all my headlines to be a different color? Won’t I need to go back and change all those classes?” Yes, you will, and that can be a substantial effort if you’re making a change late in the process, however; if you’ve worked on any code base of sufficient size, you’ll know the feeling of dread of understanding the code, let alone deleting or making a significant change. The fear of unexpected consequences either becomes paralyzing or leads to bloated CSS.</h3>
+
+<h3>With Tachyons, we felt like we were given the license to experiment, evolve our design systems, and make granular design decisions. Finding and replacing classes doesn’t seem like a bad compromise when you’re gaining creative flexibility along with stability in your code. There’s a liberation to knowing that your site will never appear to be broken to the end user and, because there’s a predesigned scale, nothing will ever look truly out-of-whack even if it doesn’t adhere to your style guide 100 percent.</h3>
+
+<h4>Efficiency</h4>
+
+<h3>For us, Tachyons eased the transition from design software to code editor so much so that we’ve completely cut making comps out of our process.</h3>
+
+<h3>One big, albeit unsurprising, benefit from working directly in the medium of the web is that we’ve been able to experiment and push our design and technical boundaries further — with much less time and effort.</h3>
+
+<h3>I’d love to hear whether anyone is using Tachyons currently and what your experience has been like. And if you haven’t tried it yet, I’d love to know if you do.</h3>
+
+
+
+<div>
+<ul class="inline"><li class="left"><a href="file:///C:/Users/user/Desktop/13.html"><p>&larr; Time to Think</p></a></li><li class="right"><a href="file:///C:/Users/user/Desktop/15.html"><p> Redesign 2017  &rarr;</p> </a> </li> </ul></div>
+
+<div><h6><p>© 2011—2018 Fore Design, Inc.</p></h6></div>
+
+<body/>
+
+
+<head/>
+<html/>
+

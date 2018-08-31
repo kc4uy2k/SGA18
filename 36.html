@@ -1,0 +1,158 @@
+<html>
+<head>
+
+<title>Helping ExpressionEngine Make Friends with Query Strings - www.perrera.com</title>
+<body>
+
+
+<body>
+
+<h2>25 FEB 2012</h2>
+
+<h1>Helping ExpressionEngine Make Friends with Query Strings</h1>
+
+<h2>BY DAN PERRERA</h2>
+
+<style>
+
+h1 {
+font-weight: normal;
+text-decoration: none;
+font-size: 80px;
+color: roboto;
+background-color: #dddddd;
+margin-top: 190px;
+margin-right: 220px;
+margin-left: 370px;
+margin-bottom: 100px;
+line-height: 1;
+text-align: left;
+
+}
+</style>
+
+<style>
+
+h2 {
+font-weight: normal;
+text-decoration: none;
+font-size: 15px;
+color: roboto;
+background-color: #dddddd;
+margin-top: 50px;
+margin-right: 50px;
+margin-left: 370px;
+margin-bottom: 50px;
+line-height: 1.6;
+text-align: justify;
+}
+</style>
+
+<style>
+h3 {
+font-weight: normal;
+text-decoration: none;
+font-size: 20px;
+color: roboto;
+background-color: #dddddd;
+margin-top: 50px;
+margin-right: 350px;
+margin-left: 370px;
+margin-bottom: 50px;
+line-height: 1.6;
+text-align: justify;
+}
+</style>
+
+<style>
+h4 {
+font-weight: bold;
+text-decoration: none;
+font-size: 20px;
+color: roboto;
+background-color: #dddddd;
+margin-top: 50px;
+margin-right: 350px;
+margin-left: 370px;
+margin-bottom: 50px;
+line-spacing: 10px;
+line-height: 1.6;
+text-align: left;
+}
+</style>
+
+<style>
+h5 {
+font-weight: normal;
+text-decoration: none;
+font-size: 15px;
+color: roboto;
+background-color: #dddddd;
+margin-top: 100px;
+margin-left: 370px;
+margin-right: 60px;
+line-spacing: 10px;
+line-height: 10;
+text-align: right;
+}
+</style>
+
+<style>
+
+h6 {
+font-weight: normal;
+text-decoration: none;
+font-size: 15px;
+margin-right: 60px;
+color: roboto;
+background-color: #dddddd;
+text-align: right;
+}
+.inline {
+display: block;
+margin: 0 !important;
+}
+
+.inline li {
+  display: inline-block;
+  margin: 0 !important;
+}
+
+.inline .right  {
+  float: right;
+  margin-right: 30px !important;
+}
+
+</style>
+
+<h3>The trouble arose this morning when a client informed me that her site, running on <u>ExpressionEngine v2.4</u>, was getting a 404 error when a third party site was trying to feature a post. The site in question was trying to pull the EE url into an iframe via a <u>query string</u>. Query strings typically look something like this: http://server/path/program?query_string.</h3>
+
+<h3>I spent a lot of time poking around looking for an .htaccess trick to get the server to accept the query string but it turned out I was barking up the wrong tree. It was actually quite an easy fix once I found it in the <u>ExpressionEngine forums</u>.</h3>
+
+<h4>Step One</h4>
+
+<h3>Make sure you’re using the recommended .htaccess code from the ExpressionEngine User Guide, only if you’re trying to remove index.php from your URLs, which is highly recommended.</h3>
+
+<h4>Step Two</h4>
+
+<h3>The second and most important step lies in the URI protocol section of the EE config file which can be found in system > expressionengine > config > config.php</h3>
+
+<h3>You’ll need to change: $config['uri_protocol'] = 'AUTO'; to: $config['uri_protocol'] = 'PATH_INFO';</h3>
+
+<h4>Step Three</h4>
+
+<h3>Celebrate.</h3>
+
+
+<div>
+<ul class="inline"><li class="left"><a href="file:///C:/Users/user/Desktop/35.html"><p>&larr; One Year of Height & Hands</p></a></li><li class="right"><a href="file:///C:/Users/user/Desktop/37.html"><p> Another Sublime Text 2 Icon  &rarr;</p> </a> </li> </ul></div>
+
+<div><h6><p>© 2011—2018 Fore Design, Inc.</p></h6></div>
+
+
+<body/>
+
+
+<head/>
+<html/>
+
